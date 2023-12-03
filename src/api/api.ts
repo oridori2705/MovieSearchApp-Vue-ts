@@ -13,11 +13,11 @@ interface RequestBody {
 
 export const request = async (req: Partial<RequestBody>) => {
   const { movieName = '', page = 1, method = 'GET', id = '', plot = '' } = req
-
+  console.log(movieName, page, id, plot)
   try {
     const { data: responseValue } = await axios({
       url: `${API_END_POINT}?apikey=${API_KEY}&${
-        movieName.length
+        movieName !== ''
           ? `${'s=' + movieName}&${'page=' + page}`
           : `${'i=' + id}&${'plot=' + plot}`
       }
