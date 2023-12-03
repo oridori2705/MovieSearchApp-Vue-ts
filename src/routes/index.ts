@@ -7,10 +7,14 @@ export default createRouter({
   routes: [
     {
       path: '/',
+      component: MainPage
+    },
+    {
+      path: '/:movie',
       component: MainPage,
       children: [
         {
-          path: '/:id',
+          path: ':id',
           component: MovieModalVue
         }
       ]

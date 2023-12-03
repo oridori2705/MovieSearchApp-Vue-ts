@@ -2,10 +2,11 @@
 import type { Search } from '~/store/movies'
 import TheIcon from './TheIcon.vue'
 import { useMovieStore } from '~/store/movies'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const movieStore = useMovieStore()
 const router = useRouter()
+const route = useRoute()
 
 const props = defineProps<{
   movie: Search
@@ -14,7 +15,7 @@ function onMovieModal() {
   movieStore.fetchMovieItem({
     id: props.movie.imdbID
   })
-  router.push(`/${props.movie.imdbID}`)
+  router.push(`/${route.params.movie}/${props.movie.imdbID}`)
 }
 </script>
 

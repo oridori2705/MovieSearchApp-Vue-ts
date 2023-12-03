@@ -3,7 +3,19 @@ import MovieSearchBar from '~/components/MovieSearchBar.vue'
 import MovieSearchResult from '~/components/MovieSearchResult.vue'
 import { useMovieStore } from '~/store/movies'
 import LoadingSearch from '~/components/LoadingSearch.vue'
+import { useRoute } from 'vue-router'
+import { onMounted } from 'vue'
+
 const movieStore = useMovieStore()
+const route = useRoute()
+
+onMounted(() => {
+  console.log(route.params)
+  if (route.params.movie) {
+    movieStore.fetchMovies({ movieName: route.params.movie as string })
+    console.log(route.params.movie)
+  }
+})
 </script>
 
 <template>
@@ -20,7 +32,7 @@ const movieStore = useMovieStore()
     <LoadingSearch v-if="movieStore.loading" />
   </div>
   <Transition>
-    <RouterView />
+    <RouterView v-if="Object.keys(movieStore.movies).length" />
   </Transition>
 </template>
 

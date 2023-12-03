@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useMovieStore } from '~/store/movies'
 import LoadingModal from '~/components/LoadingModal.vue'
 
 const movieStore = useMovieStore()
 const router = useRouter()
+const route = useRoute()
+
+const foundTodo = movieStore.movies.Search.find(
+  movie => movie.imdbID === route.params.id
+)
+foundTodo
+  ? movieStore.fetchMovieItem({ id: foundTodo.imdbID })
+  : router.push('/')
 
 function offModal() {
-  router.push('/')
+  router.push(`/${movieStore.searchMovie}`)
 }
 </script>
 
