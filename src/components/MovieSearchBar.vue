@@ -3,6 +3,7 @@ import TheIcon from '~/components/TheIcon.vue'
 import { ref } from 'vue'
 import { useMovieStore } from '~/store/movies'
 import { useRouter } from 'vue-router'
+import LoadingSearch from '~/components/LoadingSearch.vue'
 
 const movieName = ref('')
 
@@ -34,7 +35,8 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
       :value="movieName"
       @input="movieName = ($event.target as HTMLInputElement).value"
       @keydown.enter="searchMovie" />
-    <TheIcon>search</TheIcon>
+    <LoadingSearch v-if="movieStore.loading" />
+    <TheIcon v-else>search</TheIcon>
   </div>
 </template>
 
@@ -43,6 +45,7 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
   height: 80px;
   display: flex;
   position: relative;
+  :deep(.the-loader),
   :deep(.the-icon) {
     position: absolute;
     top: 0;

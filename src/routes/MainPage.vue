@@ -2,7 +2,6 @@
 import MovieSearchBar from '~/components/MovieSearchBar.vue'
 import MovieSearchResult from '~/components/MovieSearchResult.vue'
 import { useMovieStore } from '~/store/movies'
-import LoadingSearch from '~/components/LoadingSearch.vue'
 import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
 
@@ -28,9 +27,6 @@ onMounted(() => {
       <p>검색어를 입력하세요!</p>
     </div>
   </main>
-  <div class="loader">
-    <LoadingSearch v-if="movieStore.loading" />
-  </div>
   <Transition>
     <RouterView v-if="Object.keys(movieStore.movies).length" />
   </Transition>
@@ -43,12 +39,6 @@ main {
   .search-text {
     margin-top: 50px;
   }
-}
-.loader {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translate(-30%, -30%);
 }
 .v-enter-active,
 .v-leave-active {
