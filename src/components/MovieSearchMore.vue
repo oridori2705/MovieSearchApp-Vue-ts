@@ -14,7 +14,7 @@ function fetchMoreMoives() {
 
 <template>
   <div
-    class="movie-more"
+    class="movie-more shadow"
     @click="fetchMoreMoives">
     <div class="more-wrap">
       <TheIcon>add</TheIcon>

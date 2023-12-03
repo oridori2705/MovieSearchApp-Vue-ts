@@ -33,3 +33,8 @@ body {
 input {
   @include font;
 }
+.shadow {
+  box-shadow:
+    4px 4px 14px rgba(#000, 0.1),
+    4px 4px 14px rgba(#000, 0.2);
+}

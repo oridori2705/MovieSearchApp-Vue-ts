@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="movie-item">
+  <div class="movie-item shadow">
     <div class="poster">
       <img :src="movie.Poster" />
     </div>
