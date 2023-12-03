@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useMovieStore } from '~/store/movies'
+import LoadingModal from '~/components/LoadingModal.vue'
 
 const movieStore = useMovieStore()
 const router = useRouter()
@@ -15,8 +16,16 @@ function offModal() {
     <div
       class="background"
       @click="offModal"></div>
+
     <div class="contents scroll">
-      <div class="contents-div">
+      <div
+        v-if="movieStore.loading"
+        class="loading-modal">
+        <LoadingModal />
+      </div>
+      <div
+        v-else
+        class="contents-div">
         <div class="poster">
           <img
             :src="movieStore.currentMovie.Poster"
@@ -80,6 +89,7 @@ function offModal() {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .background {
     position: absolute;
     width: 100%;
@@ -95,6 +105,10 @@ function offModal() {
     border-radius: 6px;
     background-color: #fff;
     position: relative;
+    .loading-modal {
+      width: 917px;
+      height: 600px;
+    }
     .contents-div {
       display: flex;
       .poster {
