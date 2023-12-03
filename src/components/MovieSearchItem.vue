@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import type { Search } from '~/store/movies'
+import TheIcon from './TheIcon.vue'
 
-defineProps<{
+const props = defineProps<{
   movie: Search
 }>()
+console.log(props.movie)
 </script>
 
 <template>
   <div class="movie-item shadow">
-    <div class="poster">
+    <div
+      v-if="movie.Poster !== 'N/A'"
+      class="poster">
       <img :src="movie.Poster" />
+    </div>
+    <div
+      v-else
+      class="not-poster">
+      <TheIcon>broken_Image</TheIcon>
+      <p>포스터 없음</p>
     </div>
     <div class="title">
       {{ movie.Title }}
@@ -34,6 +44,16 @@ defineProps<{
       overflow: hidden;
       width: 140px;
       border-radius: 5px;
+    }
+  }
+  .not-poster {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    p {
+      font-size: 14px;
     }
   }
 }
