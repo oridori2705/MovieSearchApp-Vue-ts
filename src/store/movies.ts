@@ -21,15 +21,24 @@ interface searchMoviePayload {
 
 export const useMovieStore = defineStore('moives', {
   state: () => ({
-    movies: {} as ResponseValue
+    movies: {} as ResponseValue,
+    searchMovie: '',
+    searchPage: 1
   }),
   getters: {},
   actions: {
     async fetchMovies({ movieName, page = 1 }: searchMoviePayload) {
       try {
         const searchMovies = await request({ movieName, page })
-
-        this.movies = searchMovies
+        console.log(searchMovies)
+        if (page === 1) {
+          this.movies = searchMovies
+        } else {
+          this.movies.Search.push(...searchMovies.Search)
+        }
+        console.log(this.movies)
+        this.searchMovie = movieName
+        this.searchPage += page + 1
       } catch (error) {
         console.error('fetchedTodos failed', error)
       }
