@@ -19,6 +19,11 @@ function fetchMoreMoives() {
     <div class="more-wrap">
       <TheIcon>add</TheIcon>
       <div class="more-text">더 보기</div>
+      <div class="">
+        {{
+          `${movieStore.movies.Search.length} / ${movieStore.movies.totalResults}`
+        }}
+      </div>
     </div>
   </div>
 </template>
