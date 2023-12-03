@@ -16,7 +16,9 @@ const movieStore = useMovieStore()
       <p>검색어를 입력하세요!</p>
     </div>
   </main>
-  <RouterView />
+  <Transition>
+    <RouterView />
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
@@ -26,5 +28,13 @@ main {
   .search-text {
     margin-top: 50px;
   }
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
