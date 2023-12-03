@@ -4,7 +4,6 @@ import MovieSearchResult from '~/components/MovieSearchResult.vue'
 import { useMovieStore } from '~/store/movies'
 
 const movieStore = useMovieStore()
-console.log(movieStore.movies)
 </script>
 
 <template>
@@ -17,6 +16,7 @@ console.log(movieStore.movies)
       <p>검색어를 입력하세요!</p>
     </div>
   </main>
+  <RouterView />
 </template>
 
 <style lang="scss" scoped>
