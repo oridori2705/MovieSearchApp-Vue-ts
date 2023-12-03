@@ -92,11 +92,14 @@ export const useMovieStore = defineStore('moives', {
     movies: {} as ResponseValue,
     searchMovie: '',
     searchPage: 1,
-    currentMovie
+    currentMovie,
+    loading: false
   }),
   getters: {},
   actions: {
     async fetchMovies({ movieName, page = 1 }: searchMoviePayload) {
+      if (this.loading) return
+      this.loading = true
       try {
         const searchMovies = await request({ movieName, page })
 
@@ -109,15 +112,21 @@ export const useMovieStore = defineStore('moives', {
         this.searchPage += page + 1
       } catch (error) {
         console.error('fetchedMovies failed', error)
+      } finally {
+        this.loading = false
       }
     },
     async fetchMovieItem({ id, plot = 'full' }: movieDetailPayload) {
+      if (this.loading) return
+      this.loading = true
       try {
         const movieDetail = await request({ id, plot })
         this.currentMovie = movieDetail
         console.log(movieDetail)
       } catch (error) {
         console.error('fetchedMovieDetail failed', error)
+      } finally {
+        this.loading = false
       }
     }
   }
