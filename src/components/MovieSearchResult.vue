@@ -1,70 +1,40 @@
 <script setup lang="ts">
 import { useMovieStore } from '~/store/movies'
 import MovieSearchItem from './MovieSearchItem.vue'
-import TheIcon from './TheIcon.vue'
+import MovieSearchMore from './MovieSearchMore.vue'
 const movieStore = useMovieStore()
 </script>
 
 <template>
+  <div class="result-text">
+    {{ `'${movieStore.searchMovie}' 의 검색결과 ` }}
+  </div>
   <div class="movies-wrap">
     <div class="movie-list">
       <MovieSearchItem
         v-for="movie in movieStore.movies.Search"
         :key="movie.imdbID"
         :movie="movie" />
-      <div class="movie-more">
-        <div class="more-wrap">
-          <TheIcon>add</TheIcon>
-          <div class="more-text">더 보기</div>
-        </div>
-      </div>
+      <MovieSearchMore />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.result-text {
+  margin-top: 15px;
+  font-size: 25px;
+  font-weight: 700;
+}
 .movies-wrap {
   border-radius: 6px;
   overflow: hidden;
   margin-top: 20px;
+  cursor: pointer;
   .movie-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
-  }
-  .movie-more {
-    height: 100%;
-    background-color: rgba(#fff, 0.6);
-    border-radius: 8px;
-    position: relative;
-    .more-wrap {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      &:deep(.the-icon) {
-        border: 1px solid;
-      }
-      .more-text {
-        margin-top: 5px;
-        font-size: 16px;
-      }
-    }
-    &:hover {
-      background-color: rgba(#ddd, 0.6);
-      .more-wrap {
-        &:deep(.the-icon) {
-          border: 1px solid #fff;
-          color: #ddd;
-        }
-        .more-text {
-          color: #ddd;
-        }
-      }
-    }
   }
 }
 
