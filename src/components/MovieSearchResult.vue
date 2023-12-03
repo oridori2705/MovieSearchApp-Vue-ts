@@ -54,4 +54,12 @@ const movieStore = useMovieStore()
     }
   }
 }
+@media (max-width: 600px) {
+  .movies-wrap {
+    .movie-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
 </style>
