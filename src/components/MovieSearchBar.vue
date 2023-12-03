@@ -71,4 +71,3 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
   }
 }
 </style>
-~/store/movies
