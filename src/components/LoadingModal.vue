@@ -10,7 +10,6 @@
 
 <style lang="scss" scoped>
 .main {
-  width: 90vw;
   height: 100%;
   margin: 0 auto;
   text-align: center;
