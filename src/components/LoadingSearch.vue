@@ -6,7 +6,7 @@
 .the-loader {
   width: 30px;
   height: 30px;
-  border: 3px solid royalblue;
+  border: 3px solid;
   /* 투명하게 */
   border-top-color: transparent;
   border-radius: 50%;

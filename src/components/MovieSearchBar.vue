@@ -47,6 +47,7 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
   position: relative;
   :deep(.the-loader),
   :deep(.the-icon) {
+    color: royalblue;
     position: absolute;
     top: 0;
     bottom: 0;

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LoadingSearch from './LoadingSearch.vue'
 import TheIcon from './TheIcon.vue'
 import { useMovieStore } from '~/store/movies'
 
@@ -17,7 +18,8 @@ function fetchMoreMoives() {
     class="movie-more shadow"
     @click="fetchMoreMoives">
     <div class="more-wrap">
-      <TheIcon>add</TheIcon>
+      <LoadingSearch v-if="movieStore.loading" />
+      <TheIcon v-else>add</TheIcon>
       <div class="more-text">더 보기</div>
       <div class="">
         {{
@@ -42,6 +44,9 @@ function fetchMoreMoives() {
     display: flex;
     flex-direction: column;
     align-items: center;
+    &:deep(.the-loader) {
+      color: #ddd;
+    }
     &:deep(.the-icon) {
       border: 1px solid;
     }

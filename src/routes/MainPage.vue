@@ -9,10 +9,8 @@ const movieStore = useMovieStore()
 const route = useRoute()
 
 onMounted(() => {
-  console.log(route.params)
   if (route.params.movie) {
     movieStore.fetchMovies({ movieName: route.params.movie as string })
-    console.log(route.params.movie)
   }
 })
 </script>
