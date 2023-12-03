@@ -2,8 +2,12 @@
 import TheIcon from '~/components/TheIcon.vue'
 import { ref } from 'vue'
 import { useMovieStore } from '~/store/movies'
+import { useRouter, useRoute } from 'vue-router'
+
 const movieName = ref('')
 
+const router = useRouter()
+const route = useRoute()
 const movieStore = useMovieStore()
 
 async function searchMovie(event: MouseEvent | KeyboardEvent) {
@@ -11,12 +15,14 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
   if (event instanceof KeyboardEvent && event.isComposing) return
   if (!movieName.value.trim()) return
   try {
+    router.push(`/${movieName.value}`)
     await movieStore.fetchMovies({
       movieName: movieName.value
     })
+
     movieName.value = ''
   } catch (error) {
-    console.error('TodoCreator/createTodo failed')
+    console.error('Moviesfetch failed')
   }
 }
 </script>
