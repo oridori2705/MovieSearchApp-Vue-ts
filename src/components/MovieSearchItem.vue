@@ -91,6 +91,7 @@ function onMovieModal() {
   }
   .title {
     text-align: center;
+    font-size: inherit;
   }
   &:hover {
     .poster {
@@ -130,14 +131,18 @@ function onMovieModal() {
     }
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 417px) {
   .movie-item {
     font-size: 1rem;
     padding: 10px 4px 50px 4px;
     .poster {
       img {
-        width: 125px;
+        width: 100%;
       }
+    }
+    .title {
+      text-align: center;
+      font-size: 0.8rem;
     }
   }
 }
