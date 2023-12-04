@@ -109,6 +109,9 @@ export const useMovieStore = defineStore('moives', {
         })
 
         if (page === 1) {
+          searchMovies.Search.forEach((mv: Search) => {
+            mv.Poster = mv.Poster.replace('SX300', 'SX700')
+          })
           this.movies = searchMovies
         } else {
           this.movies.Search.push(...searchMovies.Search)
@@ -130,8 +133,9 @@ export const useMovieStore = defineStore('moives', {
           id,
           plot
         })
+        movieDetail.Poster = movieDetail.Poster.replace('SX300', 'SX700')
+
         this.currentMovie = movieDetail
-        console.log(movieDetail)
       } catch (error) {
         console.error('fetchedMovieDetail failed', error)
       } finally {
