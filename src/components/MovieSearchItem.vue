@@ -142,6 +142,12 @@ function onMovieModal() {
         width: 100%;
       }
     }
+    .not-poster {
+      width: 100%;
+      p {
+        font-size: inherit;
+      }
+    }
     .title {
       text-align: center;
       font-size: 0.8rem;
