@@ -1,7 +1,7 @@
 import axios from 'axios'
+import { VercelRequest, VercelResponse } from '@vercel/node'
 
-const API_END_POINT = import.meta.env.VITE_API_END_POINT
-const API_KEY = import.meta.env.VITE_API_KEY
+const { API_END_POINT, API_KEY } = process.env
 
 interface RequestBody {
   movieName: string
@@ -11,8 +11,15 @@ interface RequestBody {
   plot: 'short' | 'full'
 }
 
-export const request = async (req: Partial<RequestBody>) => {
-  const { movieName = '', page = 1, method = 'GET', id = '', plot = '' } = req
+export default async function (req: VercelRequest, res: VercelResponse) {
+  const {
+    movieName = '',
+    page = 1,
+    method = 'GET',
+    id = '',
+    plot = ''
+  } = req.body as Partial<RequestBody>
+
   try {
     const { data: responseValue } = await axios({
       url: `${API_END_POINT}?apikey=${API_KEY}&${
@@ -26,8 +33,9 @@ export const request = async (req: Partial<RequestBody>) => {
         'Content-Type': 'application/json'
       }
     })
-    return responseValue
+    res.status(200).json(responseValue)
   } catch (e) {
-    throw new Error('API 오류')
+    console.error('Error in serverless API:', e.message)
+    res.status(500).json({ error: '서버리스 API 오류!' })
   }
 }

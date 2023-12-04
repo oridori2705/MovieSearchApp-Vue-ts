@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { defineStore } from 'pinia'
-import { request } from '~/api/api'
 
 export interface ResponseValue {
   Search: Search[]
@@ -101,7 +101,12 @@ export const useMovieStore = defineStore('moives', {
       if (this.loading) return
       this.loading = true
       try {
-        const searchMovies = await request({ movieName, page })
+        const { data: searchMovies } = await axios.post('/api/movie', {
+          method: 'GET',
+
+          movieName,
+          page
+        })
 
         if (page === 1) {
           this.movies = searchMovies
@@ -120,7 +125,11 @@ export const useMovieStore = defineStore('moives', {
       if (this.loading) return
       this.loading = true
       try {
-        const movieDetail = await request({ id, plot })
+        const { data: movieDetail } = await axios.post('/api/movie', {
+          method: 'GET',
+          id,
+          plot
+        })
         this.currentMovie = movieDetail
         console.log(movieDetail)
       } catch (error) {
