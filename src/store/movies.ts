@@ -100,22 +100,30 @@ export const useMovieStore = defineStore('moives', {
     async fetchMovies({ movieName, page = 1 }: searchMoviePayload) {
       if (this.loading) return
       this.loading = true
+      if (this.searchMovie !== movieName) {
+        this.searchPage = 1
+      }
       try {
-        const { data: searchMovies } = await axios.post('/api/movie', {
-          method: 'GET',
-
-          movieName,
-          page
-        })
-
-        if (page === 1) {
-          searchMovies.Search.forEach((mv: Search) => {
-            mv.Poster = mv.Poster.replace('SX300', 'SX700')
+        for (let i = this.searchPage; i <= page; i++) {
+          const { data: searchMovies } = await axios.post('/api/movie', {
+            method: 'GET',
+            movieName,
+            page: i
           })
-          this.movies = searchMovies
-        } else {
-          this.movies.Search.push(...searchMovies.Search)
+
+          if (i === 1) {
+            searchMovies.Search.forEach((mv: Search) => {
+              mv.Poster = mv.Poster.replace('SX300', 'SX700')
+            })
+            this.movies = searchMovies
+          } else {
+            searchMovies.Search.forEach((mv: Search) => {
+              mv.Poster = mv.Poster.replace('SX300', 'SX700')
+            })
+            this.movies.Search.push(...searchMovies.Search)
+          }
         }
+
         this.searchMovie = movieName
         this.searchPage = ++page
       } catch (error) {

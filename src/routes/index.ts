@@ -10,7 +10,7 @@ export default createRouter({
       component: MainPage
     },
     {
-      path: '/:movie',
+      path: '/:movie/:page',
       component: MainPage,
       children: [
         {

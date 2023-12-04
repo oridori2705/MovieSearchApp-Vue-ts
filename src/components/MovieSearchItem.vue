@@ -15,7 +15,9 @@ function onMovieModal() {
   movieStore.fetchMovieItem({
     id: props.movie.imdbID
   })
-  router.push(`/${route.params.movie}/${props.movie.imdbID}`)
+  router.push(
+    `/${route.params.movie}/${route.params.page}/${props.movie.imdbID}`
+  )
 }
 </script>
 

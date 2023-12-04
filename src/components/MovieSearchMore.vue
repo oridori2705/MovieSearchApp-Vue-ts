@@ -2,7 +2,9 @@
 import LoadingSearch from './LoadingSearch.vue'
 import TheIcon from './TheIcon.vue'
 import { useMovieStore } from '~/store/movies'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const movieStore = useMovieStore()
 
 function fetchMoreMoives() {
@@ -10,6 +12,7 @@ function fetchMoreMoives() {
     movieName: movieStore.searchMovie,
     page: movieStore.searchPage
   })
+  router.push(`/${movieStore.searchMovie}/${movieStore.searchPage}`)
 }
 </script>
 

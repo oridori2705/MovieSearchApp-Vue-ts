@@ -10,7 +10,10 @@ const route = useRoute()
 
 onMounted(() => {
   if (route.params.movie) {
-    movieStore.fetchMovies({ movieName: route.params.movie as string })
+    movieStore.fetchMovies({
+      movieName: route.params.movie as string,
+      page: Number(route.params.page) as number
+    })
   }
 })
 </script>
@@ -26,7 +29,7 @@ onMounted(() => {
     </div>
   </main>
   <Transition>
-    <RouterView v-if="Object.keys(movieStore.movies).length" />
+    <RouterView v-if="movieStore.searchPage > Number(route.params.page)" />
   </Transition>
 </template>
 

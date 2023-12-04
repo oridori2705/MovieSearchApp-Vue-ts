@@ -16,9 +16,10 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
   if (event instanceof KeyboardEvent && event.isComposing) return
   if (!movieName.value.trim()) return
   try {
-    router.push(`/${movieName.value}`)
+    router.push(`/${movieName.value}/1`)
     await movieStore.fetchMovies({
-      movieName: movieName.value
+      movieName: movieName.value,
+      page: 1
     })
 
     movieName.value = ''
