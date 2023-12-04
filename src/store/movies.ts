@@ -127,7 +127,9 @@ export const useMovieStore = defineStore('moives', {
         this.searchMovie = movieName
         this.searchPage = ++page
       } catch (error) {
-        console.error('fetchedMovies failed', error)
+        if (error instanceof Error) {
+          console.error('fetchedMovies failed', error)
+        }
       } finally {
         this.loading = false
       }
@@ -145,7 +147,9 @@ export const useMovieStore = defineStore('moives', {
 
         this.currentMovie = movieDetail
       } catch (error) {
-        console.error('fetchedMovieDetail failed', error)
+        if (error instanceof Error) {
+          console.error('fetchedMovieDetail failed', error)
+        }
       } finally {
         this.loading = false
       }

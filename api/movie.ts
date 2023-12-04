@@ -34,8 +34,10 @@ export default async function (req: VercelRequest, res: VercelResponse) {
       }
     })
     res.status(200).json(responseValue)
-  } catch (e) {
-    console.error('Error in serverless API:', e.message)
-    res.status(500).json({ error: '서버리스 API 오류!' })
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('Error in serverless API:', error.message)
+      res.status(500).json({ error: '서버리스 API 오류!' })
+    }
   }
 }

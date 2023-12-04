@@ -11,8 +11,8 @@ const route = useRoute()
 onMounted(() => {
   if (route.params.movie) {
     movieStore.fetchMovies({
-      movieName: route.params.movie as string,
-      page: Number(route.params.page) as number
+      movieName: route.params.movie.toString(),
+      page: Number(route.params.page)
     })
   }
 })
