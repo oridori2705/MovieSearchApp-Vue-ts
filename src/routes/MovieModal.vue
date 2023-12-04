@@ -119,6 +119,7 @@ function offModal() {
     }
     .contents-div {
       display: flex;
+
       .poster {
         padding: 10px;
         img {
@@ -162,8 +163,14 @@ function offModal() {
 @media (max-width: 630px) {
   .modal {
     .contents {
+      max-width: calc(100vw - 100px);
       .contents-div {
         flex-direction: column;
+        .poster {
+          img {
+            width: 70vw;
+          }
+        }
       }
     }
   }

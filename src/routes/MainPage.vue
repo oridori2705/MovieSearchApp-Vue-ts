@@ -22,7 +22,7 @@ onMounted(() => {
     <div
       v-else
       class="search-text">
-      <p>검색어를 입력하세요!</p>
+      <p>영문으로 검색어를 입력하세요!</p>
     </div>
   </main>
   <Transition>
