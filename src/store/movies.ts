@@ -5,6 +5,7 @@ export interface ResponseValue {
   Search: Search[]
   totalResults: string
   Response: string
+  Error?: string
 }
 export type Search = {
   Title: string
@@ -12,6 +13,10 @@ export type Search = {
   imdbID: string
   Type: string
   Poster: string
+}
+export type SearchError = {
+  Error: string
+  Response: string
 }
 
 interface searchMoviePayload {
@@ -110,7 +115,11 @@ export const useMovieStore = defineStore('moives', {
             movieName,
             page: i
           })
+          if (searchMovies.Response === 'False') {
+            this.movies = searchMovies
 
+            break
+          }
           if (i === 1) {
             searchMovies.Search.forEach((mv: Search) => {
               mv.Poster = mv.Poster.replace('SX300', 'SX700')

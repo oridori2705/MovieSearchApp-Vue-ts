@@ -21,7 +21,17 @@ onMounted(() => {
 <template>
   <main>
     <MovieSearchBar />
-    <MovieSearchResult v-if="Object.keys(movieStore.movies).length" />
+    <MovieSearchResult
+      v-if="
+        Object.keys(movieStore.movies).length &&
+        movieStore.movies.Response === 'True'
+      " />
+    <div
+      v-else-if="movieStore.movies.Response === 'False'"
+      class="search-text">
+      <p>{{ movieStore.movies.Error }}</p>
+      <p>검색어를 다시 입력해주세요!</p>
+    </div>
     <div
       v-else
       class="search-text">
