@@ -8,11 +8,11 @@ const router = useRouter()
 const route = useRoute()
 
 if (route.params.id) {
-  const foundTodo = movieStore.movies.Search.find(
+  const foundSelctMovie = movieStore.movies.Search.find(
     movie => movie.imdbID === route.params.id
   )
-  foundTodo
-    ? movieStore.fetchMovieItem({ id: foundTodo.imdbID })
+  foundSelctMovie
+    ? movieStore.fetchMovieItem({ id: foundSelctMovie.imdbID })
     : router.push('/')
 }
 

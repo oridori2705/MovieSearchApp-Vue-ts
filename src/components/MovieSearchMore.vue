@@ -24,7 +24,7 @@ const fetchMoreMoives = () => {
       <LoadingSearch v-if="movieStore.loading" />
       <TheIcon v-else>add</TheIcon>
       <div class="more-text">더 보기</div>
-      <div class="">
+      <div>
         {{
           `${movieStore.movies.Search.length} / ${movieStore.movies.totalResults}`
         }}
