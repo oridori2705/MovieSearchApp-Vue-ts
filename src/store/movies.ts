@@ -27,30 +27,35 @@ export const useMovieStore = defineStore('moives', {
         this.searchPage = 1
       }
       try {
-        for (let i = this.searchPage; i <= page; i++) {
-          const { data: searchMovies } = await axios.post('/api/movie', {
+        const requests = Array.from({ length: page }, (_, index) =>
+          axios.post('/api/movie', {
             method: 'GET',
             movieName,
-            page: i
+            page: index + 1
           })
-          if (
-            searchMovies.Response === 'False' &&
-            this.movies.Search.length > 0 &&
-            this.movies.Search.length === Number(this.movies.totalResults)
-          ) {
-            alert('더이상 검색결과가 없습니다!')
-            router.push(
-              `/${movieName}/${this.searchPage}${
-                this.currentMovie.imdbID ? `/${this.currentMovie.imdbID}` : ''
-              }`
-            )
-            break
-          }
+        )
+
+        const responses = await Promise.all(requests)
+
+        for (const [index, response] of responses.entries()) {
+          const searchMovies = response.data
+
           if (searchMovies.Response === 'False') {
-            this.movies = searchMovies
-            break
+            if (
+              1 === this.searchPage &&
+              this.movies.Search.length > 0 &&
+              this.movies.Search.length === Number(this.movies.totalResults)
+            ) {
+              alert('더이상 검색결과가 없습니다!')
+              router.push(
+                `/${movieName}/${this.searchPage}${
+                  this.currentMovie.imdbID ? `/${this.currentMovie.imdbID}` : ''
+                }`
+              )
+              break
+            }
           }
-          if (i === 1) {
+          if (1 === index + 1) {
             searchMovies.Search.forEach((mv: Search) => {
               mv.Poster = mv.Poster.replace('SX300', 'SX700')
             })
