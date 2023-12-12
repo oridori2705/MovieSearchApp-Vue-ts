@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Search } from '~/store/movies'
+import type { Search } from '~/store/moviesTypes'
 import TheIcon from './TheIcon.vue'
 import { useMovieStore } from '~/store/movies'
 import { useRouter, useRoute } from 'vue-router'
