@@ -8,6 +8,13 @@ const router = useRouter()
 const movieStore = useMovieStore()
 
 const fetchMoreMoives = () => {
+  if (
+    movieStore.movies.Search.length === Number(movieStore.movies.totalResults)
+  ) {
+    alert('더이상 검색결과가 없습니다!')
+    return
+  }
+
   movieStore.fetchMovies({
     movieName: movieStore.searchMovie,
     page: movieStore.searchPage

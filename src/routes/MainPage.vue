@@ -9,10 +9,11 @@ const movieStore = useMovieStore()
 const route = useRoute()
 
 onMounted(() => {
+  let refreshPage = Number(route.params.page)
   if (route.params.movie) {
     movieStore.fetchMovies({
       movieName: route.params.movie.toString(),
-      page: Number(route.params.page)
+      page: refreshPage
     })
   }
 })

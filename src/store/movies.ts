@@ -7,6 +7,7 @@ import {
   currentMovie,
   movies
 } from './moviesTypes'
+import { useRouter } from 'vue-router'
 
 export const useMovieStore = defineStore('moives', {
   state: () => ({
@@ -19,6 +20,7 @@ export const useMovieStore = defineStore('moives', {
   getters: {},
   actions: {
     async fetchMovies({ movieName, page = 1 }: searchMoviePayload) {
+      const router = useRouter()
       if (this.loading) return
       this.loading = true
       if (this.searchMovie !== movieName) {
@@ -31,9 +33,21 @@ export const useMovieStore = defineStore('moives', {
             movieName,
             page: i
           })
+          if (
+            searchMovies.Response === 'False' &&
+            this.movies.Search.length > 0 &&
+            this.movies.Search.length === Number(this.movies.totalResults)
+          ) {
+            alert('더이상 검색결과가 없습니다!')
+            router.push(
+              `/${movieName}/${this.searchPage}${
+                this.currentMovie.imdbID ? `/${this.currentMovie.imdbID}` : ''
+              }`
+            )
+            break
+          }
           if (searchMovies.Response === 'False') {
             this.movies = searchMovies
-
             break
           }
           if (i === 1) {
