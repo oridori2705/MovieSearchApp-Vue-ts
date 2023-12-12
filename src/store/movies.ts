@@ -69,7 +69,7 @@ export const useMovieStore = defineStore('moives', {
         }
 
         this.searchMovie = movieName
-        this.searchPage = ++page
+        this.searchPage = page + 1
       } catch (error) {
         if (error instanceof Error) {
           console.error('fetchedMovies failed', error)
