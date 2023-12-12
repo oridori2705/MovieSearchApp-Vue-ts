@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const movieStore = useMovieStore()
 
-function fetchMoreMoives() {
+const fetchMoreMoives = () => {
   movieStore.fetchMovies({
     movieName: movieStore.searchMovie,
     page: movieStore.searchPage

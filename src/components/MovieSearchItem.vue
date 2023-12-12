@@ -11,7 +11,8 @@ const route = useRoute()
 const props = defineProps<{
   movie: Search
 }>()
-function onMovieModal() {
+
+const onMovieModal = () => {
   movieStore.fetchMovieItem({
     id: props.movie.imdbID
   })

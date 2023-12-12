@@ -16,7 +16,7 @@ if (route.params.id) {
     : router.push('/')
 }
 
-function offModal() {
+const offModal = () => {
   router.push(`/${movieStore.searchMovie}/${route.params.page}`)
 }
 </script>

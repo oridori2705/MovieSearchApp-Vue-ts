@@ -11,7 +11,7 @@ const router = useRouter()
 
 const movieStore = useMovieStore()
 
-async function searchMovie(event: MouseEvent | KeyboardEvent) {
+const searchMovie = async (event: MouseEvent | KeyboardEvent) => {
   //한글 입력시 브라우저에서 구조화하는 것 때문에 두번 요청이 들어감
   if (event instanceof KeyboardEvent && event.isComposing) return
   if (!movieName.value.trim()) return
@@ -27,8 +27,7 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
     console.error('Moviesfetch failed')
   }
 }
-
-function updateMovieName(event: Event) {
+const updateMovieName = (event: Event) => {
   const target = event.target
   if (target instanceof HTMLInputElement) {
     movieName.value = target.value
