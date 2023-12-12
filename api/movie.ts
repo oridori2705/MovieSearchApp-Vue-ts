@@ -12,13 +12,14 @@ interface RequestBody {
 }
 
 export default async function (req: VercelRequest, res: VercelResponse) {
+  const requestBody: Partial<RequestBody> = req.body || {}
   const {
     movieName = '',
     page = 1,
     method = 'GET',
     id = '',
     plot = ''
-  } = req.body as Partial<RequestBody>
+  } = requestBody
 
   try {
     const { data: responseValue } = await axios({

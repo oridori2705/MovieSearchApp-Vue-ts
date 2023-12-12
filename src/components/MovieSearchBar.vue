@@ -27,6 +27,13 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
     console.error('Moviesfetch failed')
   }
 }
+
+function updateMovieName(event: Event) {
+  const target = event.target
+  if (target instanceof HTMLInputElement) {
+    movieName.value = target.value
+  }
+}
 </script>
 
 <template>
@@ -34,7 +41,7 @@ async function searchMovie(event: MouseEvent | KeyboardEvent) {
     <input
       placeholder="영화를 검색해보세요!"
       :value="movieName"
-      @input="movieName = ($event.target as HTMLInputElement).value"
+      @input="updateMovieName"
       @keydown.enter="searchMovie" />
     <LoadingSearch v-if="movieStore.loading" />
     <TheIcon v-else>search</TheIcon>

@@ -14,10 +14,6 @@ export type Search = {
   Type: string
   Poster: string
 }
-export type SearchError = {
-  Error: string
-  Response: string
-}
 
 interface searchMoviePayload {
   movieName: string
@@ -92,9 +88,16 @@ const currentMovie: Movie = {
   Response: ''
 }
 
+const movies: ResponseValue = {
+  Search: [],
+  totalResults: '',
+  Response: '',
+  Error: ''
+}
+
 export const useMovieStore = defineStore('moives', {
   state: () => ({
-    movies: {} as ResponseValue,
+    movies,
     searchMovie: '',
     searchPage: 1,
     currentMovie,
